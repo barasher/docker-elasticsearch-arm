@@ -2,7 +2,7 @@ FROM debian:latest
 
 # https://discuss.elastic.co/t/elasticsearch-7-x-support-for-arm64-raspberry-pi-4-b/187976
 
-ENV ES_VERSION 7.6.1
+ENV ES_VERSION 7.10.0
 ENV JAVA_VERSION 11
 
 RUN apt-get update
