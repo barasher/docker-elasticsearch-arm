@@ -12,9 +12,14 @@ RUN java -version
 RUN apt-get -yq install wget
 RUN wget -q https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-${ES_VERSION}-no-jdk-amd64.deb
 RUN dpkg -i --force-all --ignore-depends=libc6 elasticsearch-${ES_VERSION}-no-jdk-amd64.deb || true
+
+RUN mkdir -p /var/backup/elasticsearch
+
 RUN echo "xpack.ml.enabled: false" >> /etc/elasticsearch/elasticsearch.yml
 #RUN echo "network.host: 0.0.0.0" >> /etc/elasticsearch/elasticsearch.yml
 RUN echo "http.host: 0.0.0.0" >> /etc/elasticsearch/elasticsearch.yml
+RUN echo "path.repo: /var/backup/elasticsearch/" >>  /etc/elasticsearch/elasticsearch.yml
+
 RUN ln -s /usr/lib/jvm/java-${JAVA_VERSION}-openjdk-armhf /usr/share/elasticsearch/jdk
 
 EXPOSE 9200 9300
